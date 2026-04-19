@@ -1,9 +1,41 @@
 const TELEGRAM_USERNAME = 'earn_walking';
 const TELEGRAM_PREFILL = "hello i'm coming earnwalking web site";
 
-function buildTelegramUrl() {
-  const params = new URLSearchParams({ text: TELEGRAM_PREFILL });
-  return `https://t.me/${TELEGRAM_USERNAME}?${params.toString()}`;
+/** Use encodeURIComponent (spaces as %20). URLSearchParams uses + which some Telegram clients mishandle. */
+function getTelegramLinks() {
+  const text = encodeURIComponent(TELEGRAM_PREFILL);
+  return {
+    https: `https://t.me/${TELEGRAM_USERNAME}?text=${text}`,
+    app: `tg://resolve?domain=${TELEGRAM_USERNAME}&text=${text}`,
+  };
+}
+
+/**
+ * Prefer native app (tg://) so the draft appears; many web clients open chat but ignore ?text=.
+ */
+function openTelegramDraft(ev) {
+  if (ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.altKey) return;
+  if (ev.button !== 0) return;
+  ev.preventDefault();
+  const { https, app } = getTelegramLinks();
+  let left = false;
+  const markLeft = () => {
+    left = true;
+  };
+  const onVis = () => {
+    if (document.visibilityState === 'hidden') markLeft();
+  };
+  window.addEventListener('blur', markLeft);
+  document.addEventListener('visibilitychange', onVis);
+  window.addEventListener('pagehide', markLeft);
+  window.location.assign(app);
+  window.setTimeout(() => {
+    window.removeEventListener('blur', markLeft);
+    document.removeEventListener('visibilitychange', onVis);
+    window.removeEventListener('pagehide', markLeft);
+    // Same-tab fallback: popups from timers are often blocked; native scheme may be unregistered (no Telegram app).
+    if (!left) window.location.assign(https);
+  }, 1200);
 }
 
 function cardHref(card) {
@@ -18,7 +50,7 @@ function cardHref(card) {
     case 'office':
       return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(card.text)}`;
     case 'telegram':
-      return buildTelegramUrl();
+      return getTelegramLinks().https;
     default:
       return null;
   }
@@ -89,7 +121,7 @@ function ContactPage({ copy, tag }) {
         {copy.cards.map((card) => {
           const href = cardHref(card);
           const channel = card.channel || 'email';
-          const openNewTab = href && /^https?:/i.test(href);
+          const openNewTab = href && /^https?:/i.test(href) && channel !== 'telegram';
           const inner = (
             <>
               <span className={`contact-channel-icon contact-channel-icon--${channel}`}>
@@ -108,6 +140,7 @@ function ContactPage({ copy, tag }) {
                 key={`${card.channel}-${card.title}`}
                 className="contact-channel-card"
                 href={href}
+                onClick={channel === 'telegram' ? openTelegramDraft : undefined}
                 {...(openNewTab ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
               >
                 {inner}
