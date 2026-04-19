@@ -45,9 +45,10 @@ const translations = {
       title: 'Contact Us',
       description: 'Reach our team for partnerships, support, or product questions.',
       cards: [
-        { title: 'Email', text: 'hello@adventure-hub.com' },
-        { title: 'Phone', text: '+1 (555) 120-4400' },
-        { title: 'Office', text: '22 Summit Street, Zurich' },
+        { title: 'Email', text: 'hello@adventure-hub.com', channel: 'email' },
+        { title: 'Phone', text: '+1 (555) 120-4400', channel: 'phone' },
+        { title: 'Office', text: '22 Summit Street, Zurich', channel: 'office' },
+        { title: 'Telegram', text: '@earn_walking', channel: 'telegram' },
       ],
     },
     faq: {
@@ -104,9 +105,10 @@ const translations = {
       title: 'Kontakt',
       description: 'Kontaktiere unser Team fur Partnerschaften, Support oder Produktfragen.',
       cards: [
-        { title: 'E-Mail', text: 'hello@adventure-hub.com' },
-        { title: 'Telefon', text: '+1 (555) 120-4400' },
-        { title: 'Buro', text: '22 Summit Street, Zurich' },
+        { title: 'E-Mail', text: 'hello@adventure-hub.com', channel: 'email' },
+        { title: 'Telefon', text: '+1 (555) 120-4400', channel: 'phone' },
+        { title: 'Buro', text: '22 Summit Street, Zurich', channel: 'office' },
+        { title: 'Telegram', text: '@earn_walking', channel: 'telegram' },
       ],
     },
     faq: {
@@ -163,9 +165,10 @@ const translations = {
       title: 'Contact',
       description: 'Contactez notre equipe pour un partenariat, du support ou des questions produit.',
       cards: [
-        { title: 'Email', text: 'hello@adventure-hub.com' },
-        { title: 'Telephone', text: '+1 (555) 120-4400' },
-        { title: 'Bureau', text: '22 Summit Street, Zurich' },
+        { title: 'Email', text: 'hello@adventure-hub.com', channel: 'email' },
+        { title: 'Telephone', text: '+1 (555) 120-4400', channel: 'phone' },
+        { title: 'Bureau', text: '22 Summit Street, Zurich', channel: 'office' },
+        { title: 'Telegram', text: '@earn_walking', channel: 'telegram' },
       ],
     },
     faq: {
@@ -222,9 +225,10 @@ const translations = {
       title: 'צור קשר',
       description: 'פנו אלינו לשיתופי פעולה, תמיכה או שאלות על המוצר.',
       cards: [
-        { title: 'אימייל', text: 'hello@adventure-hub.com' },
-        { title: 'טלפון', text: '+1 (555) 120-4400' },
-        { title: 'משרד', text: '22 Summit Street, Zurich' },
+        { title: 'אימייל', text: 'hello@adventure-hub.com', channel: 'email' },
+        { title: 'טלפון', text: '+1 (555) 120-4400', channel: 'phone' },
+        { title: 'משרד', text: '22 Summit Street, Zurich', channel: 'office' },
+        { title: 'טלגרם', text: '@earn_walking', channel: 'telegram' },
       ],
     },
     faq: {
@@ -281,9 +285,10 @@ const translations = {
       title: 'Iletisim',
       description: 'Ortaklik, destek veya urun sorulari icin ekibimize ulasin.',
       cards: [
-        { title: 'E-posta', text: 'hello@adventure-hub.com' },
-        { title: 'Telefon', text: '+1 (555) 120-4400' },
-        { title: 'Ofis', text: '22 Summit Street, Zurich' },
+        { title: 'E-posta', text: 'hello@adventure-hub.com', channel: 'email' },
+        { title: 'Telefon', text: '+1 (555) 120-4400', channel: 'phone' },
+        { title: 'Ofis', text: '22 Summit Street, Zurich', channel: 'office' },
+        { title: 'Telegram', text: '@earn_walking', channel: 'telegram' },
       ],
     },
     faq: {
@@ -340,9 +345,10 @@ const translations = {
       title: 'Kontakt',
       description: 'Skontaktuj sie z nami w sprawie wspolpracy, wsparcia lub pytan o produkt.',
       cards: [
-        { title: 'Email', text: 'hello@adventure-hub.com' },
-        { title: 'Telefon', text: '+1 (555) 120-4400' },
-        { title: 'Biuro', text: '22 Summit Street, Zurich' },
+        { title: 'Email', text: 'hello@adventure-hub.com', channel: 'email' },
+        { title: 'Telefon', text: '+1 (555) 120-4400', channel: 'phone' },
+        { title: 'Biuro', text: '22 Summit Street, Zurich', channel: 'office' },
+        { title: 'Telegram', text: '@earn_walking', channel: 'telegram' },
       ],
     },
     faq: {
@@ -399,9 +405,10 @@ const translations = {
       title: 'Contacto',
       description: 'Habla con nuestro equipo para alianzas, soporte o preguntas del producto.',
       cards: [
-        { title: 'Correo', text: 'hello@adventure-hub.com' },
-        { title: 'Telefono', text: '+1 (555) 120-4400' },
-        { title: 'Oficina', text: '22 Summit Street, Zurich' },
+        { title: 'Correo', text: 'hello@adventure-hub.com', channel: 'email' },
+        { title: 'Telefono', text: '+1 (555) 120-4400', channel: 'phone' },
+        { title: 'Oficina', text: '22 Summit Street, Zurich', channel: 'office' },
+        { title: 'Telegram', text: '@earn_walking', channel: 'telegram' },
       ],
     },
     faq: {
@@ -458,9 +465,10 @@ const translations = {
       title: 'Kontakty',
       description: 'Svazhites s nashey komandoy po voprosam partnerstva, podderzhki ili produkta.',
       cards: [
-        { title: 'Email', text: 'hello@adventure-hub.com' },
-        { title: 'Telefon', text: '+1 (555) 120-4400' },
-        { title: 'Ofis', text: '22 Summit Street, Zurich' },
+        { title: 'Email', text: 'hello@adventure-hub.com', channel: 'email' },
+        { title: 'Telefon', text: '+1 (555) 120-4400', channel: 'phone' },
+        { title: 'Ofis', text: '22 Summit Street, Zurich', channel: 'office' },
+        { title: 'Telegram', text: '@earn_walking', channel: 'telegram' },
       ],
     },
     faq: {
@@ -517,9 +525,10 @@ const translations = {
       title: 'Kontakt',
       description: 'Meld di bi eus fur Partnerschafte, Support oder Produktfrage.',
       cards: [
-        { title: 'E-Mail', text: 'hello@adventure-hub.com' },
-        { title: 'Telefon', text: '+1 (555) 120-4400' },
-        { title: 'Buro', text: '22 Summit Street, Zurich' },
+        { title: 'E-Mail', text: 'hello@adventure-hub.com', channel: 'email' },
+        { title: 'Telefon', text: '+1 (555) 120-4400', channel: 'phone' },
+        { title: 'Buro', text: '22 Summit Street, Zurich', channel: 'office' },
+        { title: 'Telegram', text: '@earn_walking', channel: 'telegram' },
       ],
     },
     faq: {

@@ -252,6 +252,124 @@
   max-width: none;
 }
 
+.contact-page .page-intro {
+  margin-bottom: 0.25rem;
+}
+
+.contact-channel-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+  margin-top: 0.5rem;
+}
+
+.contact-channel-card {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 22px 20px 22px 22px;
+  border-radius: 20px;
+  text-decoration: none;
+  color: inherit;
+  background: linear-gradient(145deg, #ffffff 0%, #faf8ff 55%, #f3f0ff 100%);
+  border: 1px solid rgba(196, 181, 253, 0.85);
+  box-shadow: 0 4px 0 rgba(109, 40, 217, 0.06), 0 14px 32px rgba(91, 33, 182, 0.08);
+  overflow: hidden;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+
+.contact-channel-card:hover {
+  transform: translateY(-5px);
+  border-color: #c4b5fd;
+  box-shadow: 0 8px 0 rgba(109, 40, 217, 0.05), 0 22px 48px rgba(91, 33, 182, 0.14);
+}
+
+.contact-channel-card:active {
+  transform: translateY(-2px);
+}
+
+.contact-channel-card:focus-visible {
+  outline: 3px solid #a78bfa;
+  outline-offset: 3px;
+}
+
+.contact-channel-icon {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  color: #ffffff;
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.12);
+}
+
+.contact-channel-icon--email {
+  background: linear-gradient(145deg, #8b5cf6 0%, #6d28d9 100%);
+}
+
+.contact-channel-icon--phone {
+  background: linear-gradient(145deg, #34d399 0%, #059669 100%);
+}
+
+.contact-channel-icon--office {
+  background: linear-gradient(145deg, #fbbf24 0%, #d97706 100%);
+}
+
+.contact-channel-icon--telegram {
+  background: linear-gradient(145deg, #38bdf8 0%, #0284c7 100%);
+}
+
+.contact-channel-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.contact-channel-body h2 {
+  margin: 0 0 6px;
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: #1f2937;
+}
+
+.contact-channel-value {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #5b21b6;
+  word-break: break-word;
+  line-height: 1.45;
+}
+
+.contact-channel-card--static {
+  cursor: default;
+}
+
+.contact-channel-card--static:hover {
+  transform: none;
+  box-shadow: 0 4px 0 rgba(109, 40, 217, 0.06), 0 14px 32px rgba(91, 33, 182, 0.08);
+}
+
+.contact-channel-arrow {
+  flex-shrink: 0;
+  align-self: center;
+  width: 10px;
+  height: 10px;
+  margin-left: 4px;
+  border-right: 2.5px solid #a78bfa;
+  border-bottom: 2.5px solid #a78bfa;
+  transform: rotate(-45deg);
+  opacity: 0.85;
+}
+
+.rtl .contact-channel-arrow {
+  transform: rotate(45deg);
+  margin-left: 0;
+  margin-right: 4px;
+}
+
 .card-meta {
   display: inline-block;
   margin-bottom: 10px;
@@ -487,7 +605,8 @@
 
   .home-grid,
   .home-panel,
-  .card-grid {
+  .card-grid,
+  .contact-channel-grid {
     grid-template-columns: 1fr;
   }
 
