@@ -31,7 +31,7 @@ function HomePage({ copy }) {
         <video
           ref={videoRef}
           className="hero-video"
-          src="/video/1.mp4"
+          src="/video/2.mp4"
           autoPlay
           muted
           loop
