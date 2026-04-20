@@ -20,10 +20,10 @@ const translations = {
     },
     home: {
       kicker: 'Plan, Navigate, Share',
-      heroHeadline: 'Walk, exercise, record, earn money',
+      heroHeadline: 'Walk, exercise, capture, earn.',
       title: 'Find and build your next outdoor adventure.',
       description:
-        'Create routes, explore curated ideas, and keep your adventure history in one place.',
+        'Follow routes, capture your adventures, and get paid for sharing them!',
       primaryCta: 'Start Planning',
       secondaryCta: 'Explore Features',
       features: [
@@ -82,9 +82,9 @@ const translations = {
     },
     home: {
       kicker: 'Planen, Navigieren, Teilen',
-      heroHeadline: 'Lauf, trainiere, filme und verdiene Geld',
+      heroHeadline: 'Lauf, trainiere, halte fest, verdiene.',
       title: 'Finde und plane dein nachstes Outdoor-Abenteuer.',
-      description: 'Erstelle Routen, entdecke Ideen und speichere deine Abenteuer an einem Ort.',
+      description: 'Folge Routen, halte deine Abenteuer fest und verdiene Geld, wenn du sie teilst!',
       primaryCta: 'Route planen',
       secondaryCta: 'Funktionen ansehen',
       features: [
@@ -142,9 +142,9 @@ const translations = {
     },
     home: {
       kicker: 'Planifier, Naviguer, Partager',
-      heroHeadline: 'Marche, fais du sport, filme et gagne de l argent',
+      heroHeadline: 'Marche, fais du sport, capture, gagne.',
       title: 'Trouvez et construisez votre prochaine aventure outdoor.',
-      description: 'Creez des itineraies, explorez des idees et gardez votre historique au meme endroit.',
+      description: 'Suivez des itineraies, capturez vos aventures et gagnez de l argent en les partageant !',
       primaryCta: 'Commencer',
       secondaryCta: 'Voir les fonctions',
       features: [
@@ -202,9 +202,9 @@ const translations = {
     },
     home: {
       kicker: 'לתכנן, לנווט, לשתף',
-      heroHeadline: 'לכו, התאמנו, צלמו ותרוויחו כסף',
+      heroHeadline: 'לכו, התאמנו, תעדו, תרוויחו.',
       title: 'מצאו ובנו את ההרפתקה הבאה שלכם בטבע.',
-      description: 'צרו מסלולים, גלו רעיונות ושמרו את היסטוריית ההרפתקאות במקום אחד.',
+      description: 'עקבו אחרי מסלולים, תעדו את ההרפתקאות שלכם וקבלו תשלום על השיתוף שלהן!',
       primaryCta: 'התחילו לתכנן',
       secondaryCta: 'גלו תכונות',
       features: [
@@ -262,9 +262,9 @@ const translations = {
     },
     home: {
       kicker: 'Planla, Yonlen, Paylas',
-      heroHeadline: 'Yuru, spor yap, video cek, para kazan',
+      heroHeadline: 'Yuru, spor yap, kaydet, kazan.',
       title: 'Siradaki acik hava maceranizi planlayin.',
-      description: 'Rotalar olusturun, fikirler kesfedin ve macera gecmisinizi tek yerde tutun.',
+      description: 'Rotalari takip edin, maceralarinizi kaydedin ve paylastikca kazanin!',
       primaryCta: 'Planlamaya basla',
       secondaryCta: 'Ozellikleri incele',
       features: [
@@ -322,9 +322,9 @@ const translations = {
     },
     home: {
       kicker: 'Planuj, Nawiguj, Udostepniaj',
-      heroHeadline: 'Idz, cwicz, nagrywaj i zarabiaj',
+      heroHeadline: 'Idz, cwicz, uchwyc, zarabiaj.',
       title: 'Znajdz i zaplanuj swoja kolejna przygode na swiezym powietrzu.',
-      description: 'Tworz trasy, odkrywaj pomysly i przechowuj historie wypraw w jednym miejscu.',
+      description: 'Podazaj trasami, uchwyc swoje przygody i zarabiaj na ich udostepnianiu!',
       primaryCta: 'Zacznij planowac',
       secondaryCta: 'Poznaj funkcje',
       features: [
@@ -382,9 +382,9 @@ const translations = {
     },
     home: {
       kicker: 'Planifica, Navega, Comparte',
-      heroHeadline: 'Camina, entrena, graba y gana dinero',
+      heroHeadline: 'Camina, entrena, captura, gana.',
       title: 'Encuentra y construye tu proxima aventura al aire libre.',
-      description: 'Crea rutas, explora ideas y guarda tu historial de aventuras en un solo lugar.',
+      description: 'Sigue rutas, captura tus aventuras y gana dinero por compartirlas.',
       primaryCta: 'Empezar',
       secondaryCta: 'Ver funciones',
       features: [
@@ -442,9 +442,9 @@ const translations = {
     },
     home: {
       kicker: 'Planirovat, Navigirovat, Delitsya',
-      heroHeadline: 'Gulyay, treniruysya, snimay i zarabatyvay',
+      heroHeadline: 'Gulyay, treniruysya, snimay, zarabatyvay.',
       title: 'Najdite i soberite svoe sleduyushchee priklyuchenie na prirode.',
-      description: 'Sozdavayte marshruty, izuchayte idei i hranite istoriyu priklyucheniy v odnom meste.',
+      description: 'Sleduyte po marshrutam, snimayte svoi priklyucheniya i poluchayte oplatu za to, chto delites imi.',
       primaryCta: 'Nachat planirovanie',
       secondaryCta: 'Posmotret vozmozhnosti',
       features: [
@@ -502,9 +502,9 @@ const translations = {
     },
     home: {
       kicker: 'Plane, Navigiere, Teile',
-      heroHeadline: 'Lauf, trainier, film und verdien Geld',
+      heroHeadline: 'Lauf, trainier, halt fescht, verdien.',
       title: 'Finde dis nechschte Outdoor-Abentuur.',
-      description: 'Erstell Routen, entdecke Idee und halt dini Abentuur an eim Ort fest.',
+      description: 'Folg Routen, halt dini Abentuur fescht und verdien Geld, wenn du sie teilsch!',
       primaryCta: 'Jetzt plane',
       secondaryCta: 'Funktionen aluege',
       features: [

@@ -407,6 +407,20 @@
   height: 100%;
   object-fit: cover;
   object-position: center;
+  opacity: 1;
+  transition: opacity 0.65s ease, filter 0.65s ease, transform 0.65s ease;
+}
+
+.hero-video.is-starting {
+  opacity: 1;
+  filter: saturate(1) blur(0);
+  transform: scale(1);
+}
+
+.hero-video.is-ending {
+  opacity: 0.2;
+  filter: saturate(0.85) blur(1.5px);
+  transform: scale(1.015);
 }
 
 .video-overlay {

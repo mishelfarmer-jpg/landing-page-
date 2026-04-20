@@ -1,8 +1,15 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import RoutePlanningSection from '../components/RoutePlanningSection';
 
 function HomePage({ copy }) {
   const videoRef = useRef(null);
+  const [videoIndex, setVideoIndex] = useState(0);
+  const [isClosing, setIsClosing] = useState(false);
+
+  const playlist = useMemo(
+    () => Array.from({ length: 7 }, (_, idx) => `/video/${idx + 1}.mp4`),
+    []
+  );
 
   useEffect(() => {
     const video = videoRef.current;
@@ -25,17 +32,54 @@ function HomePage({ copy }) {
     };
   }, []);
 
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) {
+      return undefined;
+    }
+
+    const handleTimeUpdate = () => {
+      const remaining = video.duration - video.currentTime;
+      if (Number.isFinite(remaining) && remaining <= 0.4) {
+        setIsClosing(true);
+      }
+    };
+
+    const handleLoadedData = () => {
+      setIsClosing(false);
+      const playPromise = video.play();
+      if (playPromise && typeof playPromise.catch === 'function') {
+        playPromise.catch(() => {});
+      }
+    };
+
+    const handleEnded = () => {
+      setIsClosing(false);
+      setVideoIndex((current) => (current + 1) % playlist.length);
+    };
+
+    video.addEventListener('timeupdate', handleTimeUpdate);
+    video.addEventListener('loadeddata', handleLoadedData);
+    video.addEventListener('ended', handleEnded);
+
+    return () => {
+      video.removeEventListener('timeupdate', handleTimeUpdate);
+      video.removeEventListener('loadeddata', handleLoadedData);
+      video.removeEventListener('ended', handleEnded);
+    };
+  }, [playlist.length]);
+
   return (
     <main className="home-page">
       <section className="video-hero">
         <video
           ref={videoRef}
-          className="hero-video"
-          src="/video/2.mp4"
+          className={`hero-video ${isClosing ? 'is-ending' : 'is-starting'}`}
+          src={playlist[videoIndex]}
           autoPlay
           muted
-          loop
           playsInline
+          preload="auto"
           disablePictureInPicture
           controlsList="nodownload noplaybackrate noremoteplayback"
           onContextMenu={(event) => event.preventDefault()}

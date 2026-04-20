@@ -89,6 +89,10 @@
     gap: 3rem;
   }
 
+  .route-planning-card--reversed {
+    flex-direction: row-reverse;
+  }
+
   .route-planning-copy,
   .route-planning-media,
   .css-q681y5,
