@@ -20,11 +20,11 @@ const translations = {
     },
     home: {
       kicker: 'Plan, Navigate, Share',
-      heroHeadline: 'Walk, exercise, capture, earn.',
+      heroHeadline: 'Earn, Walk, Exercise, Capture.',
       title: 'Find and build your next outdoor adventure.',
       description:
         'Follow routes, capture your adventures, and get paid for sharing them!',
-      botCta: 'Open Telegram Bot',
+      botCta: 'Open Telegram',
       primaryCta: 'Start Planning',
       secondaryCta: 'Explore Features',
       features: [
@@ -90,7 +90,7 @@ const translations = {
       heroHeadline: 'Lauf, trainiere, halte fest, verdiene.',
       title: 'Finde und plane dein nachstes Outdoor-Abenteuer.',
       description: 'Folge Routen, halte deine Abenteuer fest und verdiene Geld, wenn du sie teilst!',
-      botCta: 'Telegram-Bot offnen',
+      botCta: 'Telegram offnen',
       primaryCta: 'Route planen',
       secondaryCta: 'Funktionen ansehen',
       features: [
@@ -155,7 +155,7 @@ const translations = {
       heroHeadline: 'Marche, fais du sport, capture, gagne.',
       title: 'Trouvez et construisez votre prochaine aventure outdoor.',
       description: 'Suivez des itineraies, capturez vos aventures et gagnez de l argent en les partageant !',
-      botCta: 'Ouvrir le bot Telegram',
+      botCta: 'Ouvrir Telegram',
       primaryCta: 'Commencer',
       secondaryCta: 'Voir les fonctions',
       features: [
@@ -220,7 +220,7 @@ const translations = {
       heroHeadline: 'לכו, התאמנו, תעדו, תרוויחו.',
       title: 'מצאו ובנו את ההרפתקה הבאה שלכם בטבע.',
       description: 'עקבו אחרי מסלולים, תעדו את ההרפתקאות שלכם וקבלו תשלום על השיתוף שלהן!',
-      botCta: 'כניסה לבוט טלגרם',
+      botCta: 'כניסה לטלגרם',
       primaryCta: 'התחילו לתכנן',
       secondaryCta: 'גלו תכונות',
       features: [
@@ -285,7 +285,7 @@ const translations = {
       heroHeadline: 'Yuru, spor yap, kaydet, kazan.',
       title: 'Siradaki acik hava maceranizi planlayin.',
       description: 'Rotalari takip edin, maceralarinizi kaydedin ve paylastikca kazanin!',
-      botCta: 'Telegram botunu ac',
+      botCta: 'Telegram ac',
       primaryCta: 'Planlamaya basla',
       secondaryCta: 'Ozellikleri incele',
       features: [
@@ -350,7 +350,7 @@ const translations = {
       heroHeadline: 'Idz, cwicz, uchwyc, zarabiaj.',
       title: 'Znajdz i zaplanuj swoja kolejna przygode na swiezym powietrzu.',
       description: 'Podazaj trasami, uchwyc swoje przygody i zarabiaj na ich udostepnianiu!',
-      botCta: 'Otworz bota Telegram',
+      botCta: 'Otworz Telegram',
       primaryCta: 'Zacznij planowac',
       secondaryCta: 'Poznaj funkcje',
       features: [
@@ -415,7 +415,7 @@ const translations = {
       heroHeadline: 'Camina, entrena, captura, gana.',
       title: 'Encuentra y construye tu proxima aventura al aire libre.',
       description: 'Sigue rutas, captura tus aventuras y gana dinero por compartirlas.',
-      botCta: 'Abrir bot de Telegram',
+      botCta: 'Abrir Telegram',
       primaryCta: 'Empezar',
       secondaryCta: 'Ver funciones',
       features: [
@@ -480,7 +480,7 @@ const translations = {
       heroHeadline: 'Gulyay, treniruysya, snimay, zarabatyvay.',
       title: 'Najdite i soberite svoe sleduyushchee priklyuchenie na prirode.',
       description: 'Sleduyte po marshrutam, snimayte svoi priklyucheniya i poluchayte oplatu za to, chto delites imi.',
-      botCta: 'Otkryt Telegram-bota',
+      botCta: 'Otkryt Telegram',
       primaryCta: 'Nachat planirovanie',
       secondaryCta: 'Posmotret vozmozhnosti',
       features: [
@@ -545,7 +545,7 @@ const translations = {
       heroHeadline: 'Lauf, trainier, halt fescht, verdien.',
       title: 'Finde dis nechschte Outdoor-Abentuur.',
       description: 'Folg Routen, halt dini Abentuur fescht und verdien Geld, wenn du sie teilsch!',
-      botCta: 'Telegram-Bot offne',
+      botCta: 'Telegram offne',
       primaryCta: 'Jetzt plane',
       secondaryCta: 'Funktionen aluege',
       features: [

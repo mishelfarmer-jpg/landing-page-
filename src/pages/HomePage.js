@@ -4,6 +4,7 @@ import RoutePlanningSection from '../components/RoutePlanningSection';
 function HomePage({ copy }) {
   const videoRef = useRef(null);
   const transitionTimeoutRef = useRef(null);
+  const autoAdvanceTimeoutRef = useRef(null);
   const [videoIndex, setVideoIndex] = useState(0);
   const [isClosing, setIsClosing] = useState(false);
 
@@ -39,41 +40,36 @@ function HomePage({ copy }) {
       return undefined;
     }
 
-    const handleTimeUpdate = () => {
-      const remaining = video.duration - video.currentTime;
-      if (Number.isFinite(remaining) && remaining <= 0.4) {
-        setIsClosing(true);
-      }
-    };
-
     const handleLoadedData = () => {
       setIsClosing(false);
+      if (autoAdvanceTimeoutRef.current) {
+        window.clearTimeout(autoAdvanceTimeoutRef.current);
+      }
+      autoAdvanceTimeoutRef.current = window.setTimeout(() => {
+        setIsClosing(true);
+        transitionTimeoutRef.current = window.setTimeout(() => {
+          setVideoIndex((current) => (current + 1) % playlist.length);
+        }, 260);
+      }, 5000);
       const playPromise = video.play();
       if (playPromise && typeof playPromise.catch === 'function') {
         playPromise.catch(() => {});
       }
     };
-
-    const handleEnded = () => {
-      setIsClosing(false);
-      setVideoIndex((current) => (current + 1) % playlist.length);
-    };
-
-    video.addEventListener('timeupdate', handleTimeUpdate);
     video.addEventListener('loadeddata', handleLoadedData);
-    video.addEventListener('ended', handleEnded);
 
     return () => {
-      video.removeEventListener('timeupdate', handleTimeUpdate);
       video.removeEventListener('loadeddata', handleLoadedData);
-      video.removeEventListener('ended', handleEnded);
     };
-  }, [playlist.length]);
+  }, [videoIndex, playlist.length]);
 
   useEffect(
     () => () => {
       if (transitionTimeoutRef.current) {
         window.clearTimeout(transitionTimeoutRef.current);
+      }
+      if (autoAdvanceTimeoutRef.current) {
+        window.clearTimeout(autoAdvanceTimeoutRef.current);
       }
     },
     []
@@ -82,6 +78,9 @@ function HomePage({ copy }) {
   const switchVideo = (direction) => {
     if (isClosing) {
       return;
+    }
+    if (autoAdvanceTimeoutRef.current) {
+      window.clearTimeout(autoAdvanceTimeoutRef.current);
     }
     setIsClosing(true);
     transitionTimeoutRef.current = window.setTimeout(() => {
@@ -137,7 +136,21 @@ function HomePage({ copy }) {
             rel="noopener noreferrer"
           >
             <span className="hero-bot-cta-icon" aria-hidden="true">
-              ✈
+              <svg viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M21.8 3.2 2.9 10.4c-1 .4-1 1 0 1.3l4.7 1.5 1.7 5.3c.2.8.7 1 1.2.4l2.7-3 4.9 3.6c.8.6 1.4.3 1.6-.8l3.2-14c.3-1.2-.4-1.8-1.4-1.5Z"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="m7.9 13.2 11.3-7.6M9.3 18.7l1.2-4.2"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
             </span>
             <span>{copy.botCta}</span>
           </a>

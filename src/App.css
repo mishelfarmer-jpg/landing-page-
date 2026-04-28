@@ -602,6 +602,11 @@
   font-size: 0.92rem;
 }
 
+.hero-bot-cta-icon svg {
+  width: 15px;
+  height: 15px;
+}
+
 .hero-shape {
   position: absolute;
   z-index: 1;
