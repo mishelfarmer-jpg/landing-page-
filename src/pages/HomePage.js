@@ -3,6 +3,7 @@ import RoutePlanningSection from '../components/RoutePlanningSection';
 
 function HomePage({ copy }) {
   const videoRef = useRef(null);
+  const transitionTimeoutRef = useRef(null);
   const [videoIndex, setVideoIndex] = useState(0);
   const [isClosing, setIsClosing] = useState(false);
 
@@ -69,6 +70,28 @@ function HomePage({ copy }) {
     };
   }, [playlist.length]);
 
+  useEffect(
+    () => () => {
+      if (transitionTimeoutRef.current) {
+        window.clearTimeout(transitionTimeoutRef.current);
+      }
+    },
+    []
+  );
+
+  const switchVideo = (direction) => {
+    if (isClosing) {
+      return;
+    }
+    setIsClosing(true);
+    transitionTimeoutRef.current = window.setTimeout(() => {
+      setVideoIndex((current) => {
+        const next = current + direction;
+        return (next + playlist.length) % playlist.length;
+      });
+    }, 260);
+  };
+
   return (
     <main className="home-page">
       <section className="video-hero">
@@ -85,10 +108,39 @@ function HomePage({ copy }) {
           onContextMenu={(event) => event.preventDefault()}
         />
         <div className="video-overlay" />
+        <div className="hero-video-controls" aria-label="Video controls">
+          <button
+            type="button"
+            className="hero-video-control hero-video-control-prev"
+            onClick={() => switchVideo(-1)}
+            aria-label="Previous video"
+          >
+            <span aria-hidden="true">←</span>
+          </button>
+          <button
+            type="button"
+            className="hero-video-control hero-video-control-next"
+            onClick={() => switchVideo(1)}
+            aria-label="Next video"
+          >
+            <span aria-hidden="true">→</span>
+          </button>
+        </div>
 
         <div className="hero-video-copy">
           <h1>{copy.heroHeadline}</h1>
           <p>{copy.description}</p>
+          <a
+            className="hero-bot-cta"
+            href="https://t.me/earn_walking_bot"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span className="hero-bot-cta-icon" aria-hidden="true">
+              ✈
+            </span>
+            <span>{copy.botCta}</span>
+          </a>
         </div>
 
         <svg className="hero-shape shape-one" viewBox="0 0 200 200" aria-hidden="true">
@@ -102,7 +154,7 @@ function HomePage({ copy }) {
         </svg>
       </section>
 
-      <RoutePlanningSection />
+      <RoutePlanningSection items={copy.routeCards} />
     </main>
   );
 }

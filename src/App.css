@@ -35,10 +35,15 @@
 
 .brand {
   min-width: 128px;
-  font-size: 1.2rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  color: #6d28d9;
+  display: flex;
+  align-items: center;
+}
+
+.brand-logo {
+  display: block;
+  height: 64px;
+  width: auto;
+  object-fit: contain;
 }
 
 .toolbar {
@@ -77,19 +82,69 @@
 
 .language-select {
   display: flex;
+  position: relative;
   align-items: center;
   gap: 8px;
   font-size: 0.92rem;
   color: #5b21b6;
 }
 
-.language-select select {
+.language-trigger {
   border: 1px solid #c4b5fd;
   border-radius: 10px;
   padding: 8px 10px;
   background: #f5f3ff;
   color: #5b21b6;
   font: inherit;
+  cursor: pointer;
+  min-width: 165px;
+  text-align: left;
+}
+
+.language-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 60;
+  width: 220px;
+  border: 1px solid #ddd6fe;
+  border-radius: 12px;
+  padding: 6px;
+  background: #ffffff;
+  box-shadow: 0 16px 32px rgba(76, 29, 149, 0.12);
+}
+
+.language-option {
+  width: 100%;
+  border: 0;
+  border-radius: 8px;
+  padding: 8px 10px;
+  background: transparent;
+  color: #4c1d95;
+  text-align: left;
+  cursor: pointer;
+}
+
+.language-option:hover {
+  background: #f5f3ff;
+}
+
+.language-option.active {
+  background: #ede9fe;
+  font-weight: 600;
+}
+
+.language-option-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.language-option-content svg {
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  overflow: hidden;
 }
 
 .hamburger {
@@ -175,6 +230,12 @@
 
 .mobile-language {
   margin-top: 18px;
+  align-items: flex-start;
+}
+
+.mobile-language .language-menu {
+  left: 0;
+  right: auto;
 }
 
 .mobile-menu.open {
@@ -435,6 +496,50 @@
   box-shadow: inset 0 0 120px rgba(30, 41, 59, 0.38);
 }
 
+.hero-video-controls {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.hero-video-control {
+  position: absolute;
+  top: 50%;
+  width: 52px;
+  height: 52px;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.28);
+  color: #ffffff;
+  display: grid;
+  place-items: center;
+  font-size: 1.4rem;
+  cursor: pointer;
+  pointer-events: auto;
+  transform: translateY(-50%);
+  backdrop-filter: blur(6px);
+  transition: transform 0.22s ease, background 0.22s ease, border-color 0.22s ease;
+}
+
+.hero-video-control:hover {
+  transform: translateY(-50%) scale(1.08);
+  background: rgba(124, 58, 237, 0.5);
+  border-color: rgba(255, 255, 255, 0.72);
+}
+
+.hero-video-control:active {
+  transform: translateY(-50%) scale(0.96);
+}
+
+.hero-video-control-prev {
+  left: 18px;
+}
+
+.hero-video-control-next {
+  right: 18px;
+}
+
 .hero-video-copy {
   position: absolute;
   inset: 0;
@@ -458,6 +563,43 @@
   max-width: 720px;
   color: rgba(255, 255, 255, 0.96);
   text-shadow: 0 6px 14px rgba(15, 23, 42, 0.42);
+}
+
+.hero-bot-cta {
+  margin: 22px auto 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  background: linear-gradient(135deg, rgba(14, 165, 233, 0.35), rgba(37, 99, 235, 0.5));
+  color: #ffffff;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 14px 28px rgba(30, 41, 59, 0.28);
+  backdrop-filter: blur(6px);
+  transition: transform 0.24s ease, box-shadow 0.24s ease, background 0.24s ease;
+}
+
+.hero-bot-cta:hover {
+  transform: translateY(-2px) scale(1.02);
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.45), rgba(59, 130, 246, 0.62));
+  box-shadow: 0 18px 34px rgba(30, 41, 59, 0.34);
+}
+
+.hero-bot-cta:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.hero-bot-cta-icon {
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.24);
+  font-size: 0.92rem;
 }
 
 .hero-shape {
@@ -636,6 +778,20 @@
   .shape-three {
     width: 90px;
     height: 90px;
+  }
+
+  .hero-video-control {
+    width: 46px;
+    height: 46px;
+    font-size: 1.2rem;
+  }
+
+  .hero-video-control-prev {
+    left: 12px;
+  }
+
+  .hero-video-control-next {
+    right: 12px;
   }
 }
 

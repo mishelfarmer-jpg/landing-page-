@@ -1,9 +1,9 @@
 import './App.css';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import HomePage from './pages/HomePage';
 import ContactPage from './pages/ContactPage';
 import FaqPage from './pages/FaqPage';
-import BlogsPage from './pages/BlogsPage';
+import ReactCountryFlag from 'react-country-flag';
 import supportedLanguages from './i18n/languages';
 import useI18n from './i18n/useI18n';
 
@@ -24,6 +24,7 @@ const translations = {
       title: 'Find and build your next outdoor adventure.',
       description:
         'Follow routes, capture your adventures, and get paid for sharing them!',
+      botCta: 'Open Telegram Bot',
       primaryCta: 'Start Planning',
       secondaryCta: 'Explore Features',
       features: [
@@ -40,24 +41,28 @@ const translations = {
         'Offline map support for low-signal areas.',
         'Progress tracking and activity history.',
       ],
+      routeCards: [
+        { title: 'Earn for Every Hour', text: 'After your videos are reviewed and approved, you get paid for every recorded hour. The more quality content you submit, the more you earn.' },
+        { title: 'Record the Assigned Route', text: 'Pick the assigned route and record your full journey while you move. Follow the quick guidelines to produce clear, usable content.' },
+        { title: 'Stay Active, Keep Moving', text: 'Turn every route into a fitness mission and build a healthier, more active routine every day.' },
+        { title: 'Walk and Complete the Route', text: 'Follow suggested paths, stay on the move, and complete each route with real on-foot progress.' },
+      ],
     },
     contact: {
       title: 'Contact Us',
       description: 'Reach our team for partnerships, support, or product questions.',
       cards: [
-        { title: 'Email', text: 'hello@adventure-hub.com', channel: 'email' },
-        { title: 'Phone', text: '+1 (555) 120-4400', channel: 'phone' },
-        { title: 'Office', text: '22 Summit Street, Zurich', channel: 'office' },
-        { title: 'Telegram', text: '@earn_walking', channel: 'telegram' },
+        { title: 'Office', text: 'ul. Marszałkowska 1, 00-624 Warszawa, Poland', channel: 'office' },
+        { title: 'Telegram', text: '@earn_walking_bot', channel: 'telegram' },
       ],
     },
     faq: {
       title: 'Frequently Asked Questions',
       description: 'Quick answers for the questions users ask most often.',
       items: [
-        { q: 'Can I plan routes for different activities?', a: 'Yes. The platform can be adapted for hiking, cycling, city walks, and more.' },
-        { q: 'Will it support multiple languages?', a: 'Yes. The interface now includes a language switcher for the requested locales.' },
-        { q: 'Can content be customized later?', a: 'Absolutely. This structure is ready for replacing placeholder copy with your final content.' },
+        { q: 'How do I start working?', a: 'Open the Telegram bot address and follow the steps there to get started.' },
+        { q: 'How and when do I get paid?', a: 'After you submit a video and it is approved by the admin, payment is sent to your card. Each approved video pays between $10 and $15.' },
+        { q: 'What is this project?', a: 'We are a startup building a Waze-like app for places that are still not fully usable or mapped.' },
       ],
     },
     blogs: {
@@ -85,6 +90,7 @@ const translations = {
       heroHeadline: 'Lauf, trainiere, halte fest, verdiene.',
       title: 'Finde und plane dein nachstes Outdoor-Abenteuer.',
       description: 'Folge Routen, halte deine Abenteuer fest und verdiene Geld, wenn du sie teilst!',
+      botCta: 'Telegram-Bot offnen',
       primaryCta: 'Route planen',
       secondaryCta: 'Funktionen ansehen',
       features: [
@@ -100,24 +106,28 @@ const translations = {
         'Offline-Karten fur schwache Netze.',
         'Fortschritt und Aktivitatsverlauf.',
       ],
+      routeCards: [
+        { title: 'Verdiene fur jede Stunde', text: 'Nach Prufung und Freigabe deiner Videos wirst du fur jede aufgenommene Stunde bezahlt. Je mehr gute Inhalte du einreichst, desto mehr verdienst du.' },
+        { title: 'Nimm die zugewiesene Route auf', text: 'Wahle die zugewiesene Strecke und zeichne deine Bewegung durchgehend auf. Mit den Richtlinien erstellst du nutzbare Inhalte.' },
+        { title: 'Bleib aktiv, bleib in Bewegung', text: 'Mach aus jeder Route eine Fitnesschance und baue dir einen aktiveren Alltag auf.' },
+        { title: 'Gehe und schliesse die Route ab', text: 'Folge den vorgeschlagenen Wegen, bleib aktiv und schliesse jede Route mit echter Bewegung ab.' },
+      ],
     },
     contact: {
       title: 'Kontakt',
       description: 'Kontaktiere unser Team fur Partnerschaften, Support oder Produktfragen.',
       cards: [
-        { title: 'E-Mail', text: 'hello@adventure-hub.com', channel: 'email' },
-        { title: 'Telefon', text: '+1 (555) 120-4400', channel: 'phone' },
-        { title: 'Buro', text: '22 Summit Street, Zurich', channel: 'office' },
-        { title: 'Telegram', text: '@earn_walking', channel: 'telegram' },
+        { title: 'Buro', text: 'ul. Marszałkowska 1, 00-624 Warszawa, Poland', channel: 'office' },
+        { title: 'Telegram', text: '@earn_walking_bot', channel: 'telegram' },
       ],
     },
     faq: {
       title: 'Haufige Fragen',
       description: 'Schnelle Antworten auf die wichtigsten Fragen.',
       items: [
-        { q: 'Kann ich Routen fur verschiedene Aktivitaten planen?', a: 'Ja. Die Plattform eignet sich fur Wandern, Radfahren, Stadtspaziergange und mehr.' },
-        { q: 'Unterstutzt die Seite mehrere Sprachen?', a: 'Ja. Die Oberflache enthalt jetzt einen Sprachumschalter fur die gewunschten Sprachen.' },
-        { q: 'Kann ich Inhalte spater anpassen?', a: 'Ja. Die Struktur ist bereit fur deine finalen Texte und Inhalte.' },
+        { q: 'Wie starte ich?', a: 'Offne die Telegram-Bot-Adresse und folge dort Schritt fur Schritt dem Ablauf.' },
+        { q: 'Wie und wann bekomme ich mein Geld?', a: 'Nachdem du ein Video sendest und es vom Admin bestatigt wird, geht die Auszahlung auf deine Karte. Pro freigegebenem Video gibt es 10 bis 15 Dollar.' },
+        { q: 'Was ist dieses Projekt?', a: 'Wir sind ein Startup und bauen eine App ahnlich wie Waze fur Orte, die noch nicht gut nutzbar oder erfasst sind.' },
       ],
     },
     blogs: {
@@ -145,6 +155,7 @@ const translations = {
       heroHeadline: 'Marche, fais du sport, capture, gagne.',
       title: 'Trouvez et construisez votre prochaine aventure outdoor.',
       description: 'Suivez des itineraies, capturez vos aventures et gagnez de l argent en les partageant !',
+      botCta: 'Ouvrir le bot Telegram',
       primaryCta: 'Commencer',
       secondaryCta: 'Voir les fonctions',
       features: [
@@ -160,24 +171,28 @@ const translations = {
         'Cartes hors ligne.',
         'Suivi des activites.',
       ],
+      routeCards: [
+        { title: 'Gagne pour chaque heure', text: 'Apres validation de tes videos, tu es paye pour chaque heure enregistree. Plus tu contribues, plus tu gagnes.' },
+        { title: 'Enregistre l itineraire assigne', text: 'Choisis l itineraire assigne et filme ton parcours en continu pendant que tu avances. Suis les consignes pour produire un contenu exploitable.' },
+        { title: 'Reste actif, continue a bouger', text: 'Transforme chaque trajet en opportunite fitness et construis un style de vie plus actif.' },
+        { title: 'Marche et termine l itineraire', text: 'Suis les chemins proposes, reste en mouvement et termine chaque itineraire avec un deplacement reel.' },
+      ],
     },
     contact: {
       title: 'Contact',
       description: 'Contactez notre equipe pour un partenariat, du support ou des questions produit.',
       cards: [
-        { title: 'Email', text: 'hello@adventure-hub.com', channel: 'email' },
-        { title: 'Telephone', text: '+1 (555) 120-4400', channel: 'phone' },
-        { title: 'Bureau', text: '22 Summit Street, Zurich', channel: 'office' },
-        { title: 'Telegram', text: '@earn_walking', channel: 'telegram' },
+        { title: 'Bureau', text: 'ul. Marszałkowska 1, 00-624 Warszawa, Poland', channel: 'office' },
+        { title: 'Telegram', text: '@earn_walking_bot', channel: 'telegram' },
       ],
     },
     faq: {
       title: 'Questions frequentes',
       description: 'Des reponses rapides aux questions les plus posees.',
       items: [
-        { q: 'Puis-je planifier plusieurs types de parcours ?', a: 'Oui. La plateforme peut etre adaptee a la randonnee, au velo et a d autres activites.' },
-        { q: 'Le site prend-il en charge plusieurs langues ?', a: 'Oui. L interface inclut maintenant un selecteur de langue.' },
-        { q: 'Puis-je modifier le contenu plus tard ?', a: 'Oui. La structure est prete pour vos contenus finaux.' },
+        { q: 'Comment commencer ?', a: 'Ouvrez l adresse du bot Telegram et suivez les etapes une par une.' },
+        { q: 'Comment et quand suis-je paye ?', a: 'Apres l envoi de votre video et sa validation par l admin, le paiement est envoye sur votre carte. Chaque video validee rapporte entre 10 et 15 dollars.' },
+        { q: 'Quel est ce projet ?', a: 'Nous sommes une startup qui construit une application type Waze pour des zones encore peu exploitables ou non cartographiees.' },
       ],
     },
     blogs: {
@@ -205,6 +220,7 @@ const translations = {
       heroHeadline: 'לכו, התאמנו, תעדו, תרוויחו.',
       title: 'מצאו ובנו את ההרפתקה הבאה שלכם בטבע.',
       description: 'עקבו אחרי מסלולים, תעדו את ההרפתקאות שלכם וקבלו תשלום על השיתוף שלהן!',
+      botCta: 'כניסה לבוט טלגרם',
       primaryCta: 'התחילו לתכנן',
       secondaryCta: 'גלו תכונות',
       features: [
@@ -220,24 +236,28 @@ const translations = {
         'מפות אופליין.',
         'מעקב אחר התקדמות ופעילויות.',
       ],
+      routeCards: [
+        { title: 'הרוויחו על כל שעה', text: 'אחרי שהסרטונים שלכם נבדקים ומאושרים, תקבלו תשלום על כל שעה מוקלטת. ככל שתעלו יותר תוכן איכותי, תרוויחו יותר.' },
+        { title: 'צלמו את המסלול שהוקצה', text: 'בחרו את המסלול שהוקצה ותעדו את כל הדרך ברצף תוך כדי תנועה. עקבו אחרי ההנחיות כדי ליצור תוכן שימושי.' },
+        { title: 'הישארו פעילים ותמשיכו לזוז', text: 'הפכו כל מסלול להזדמנות לכושר ובנו אורח חיים פעיל ובריא יותר.' },
+        { title: 'ללכת ולהשלים את המסלול', text: 'עקבו אחרי המסלולים המומלצים, הישארו בתנועה והשלימו כל מסלול עם הליכה אמיתית.' },
+      ],
     },
     contact: {
       title: 'צור קשר',
       description: 'פנו אלינו לשיתופי פעולה, תמיכה או שאלות על המוצר.',
       cards: [
-        { title: 'אימייל', text: 'hello@adventure-hub.com', channel: 'email' },
-        { title: 'טלפון', text: '+1 (555) 120-4400', channel: 'phone' },
-        { title: 'משרד', text: '22 Summit Street, Zurich', channel: 'office' },
-        { title: 'טלגרם', text: '@earn_walking', channel: 'telegram' },
+        { title: 'משרד', text: 'ul. Marszałkowska 1, 00-624 Warszawa, Poland', channel: 'office' },
+        { title: 'טלגרם', text: '@earn_walking_bot', channel: 'telegram' },
       ],
     },
     faq: {
       title: 'שאלות נפוצות',
       description: 'תשובות מהירות לשאלות הכי נפוצות.',
       items: [
-        { q: 'אפשר לתכנן מסלולים לסוגי פעילות שונים?', a: 'כן. המערכת מתאימה להליכה, רכיבה, טיולי עיר ועוד.' },
-        { q: 'האם האתר תומך בכמה שפות?', a: 'כן. הוספנו מחליף שפה לשפות שביקשת.' },
-        { q: 'אפשר לעדכן את התוכן בהמשך?', a: 'כן. המבנה מוכן להחלפה בתוכן הסופי שלך.' },
+        { q: 'איך מתחילים לעבוד?', a: 'נכנסים לכתובת של בוט הטלגרם וממשיכים לפי השלבים אחד אחרי השני.' },
+        { q: 'מתי ואיך מקבלים תשלום?', a: 'אחרי שליחת סרטון ואישור של אדמין, התשלום נשלח לכרטיס שלך. על כל סרטון מאושר משלמים בין 10 ל-15 דולר.' },
+        { q: 'מה הפרויקט הזה?', a: 'אנחנו סטארטאפ שבונה אפליקציה בסגנון Waze לאזורים שעדיין לא שימושיים או לא ממופים מספיק.' },
       ],
     },
     blogs: {
@@ -265,6 +285,7 @@ const translations = {
       heroHeadline: 'Yuru, spor yap, kaydet, kazan.',
       title: 'Siradaki acik hava maceranizi planlayin.',
       description: 'Rotalari takip edin, maceralarinizi kaydedin ve paylastikca kazanin!',
+      botCta: 'Telegram botunu ac',
       primaryCta: 'Planlamaya basla',
       secondaryCta: 'Ozellikleri incele',
       features: [
@@ -280,24 +301,28 @@ const translations = {
         'Cevrimdisi harita destegi.',
         'Ilerleme ve aktivite gecmisi.',
       ],
+      routeCards: [
+        { title: 'Her Saat Icin Kazan', text: 'Videolarin onaylandiktan sonra kayitli her saat icin odeme alirsin. Ne kadar cok katkida bulunursan o kadar cok kazanirsin.' },
+        { title: 'Atanan Rotayi Kaydet', text: 'Atanan rotayi sec ve hareket halindeyken yolculugunu kesintisiz kaydet. Kisa kurallari takip ederek kullanilabilir icerik olustur.' },
+        { title: 'Aktif Kal, Harekete Devam Et', text: 'Her rotayi bir fitness firsatina cevir ve daha aktif bir yasam tarzi kur.' },
+        { title: 'Yuru ve Rotayi Tamamla', text: 'Onerilen yollari takip et, aktif kal ve her rotayi gercek hareketle tamamla.' },
+      ],
     },
     contact: {
       title: 'Iletisim',
       description: 'Ortaklik, destek veya urun sorulari icin ekibimize ulasin.',
       cards: [
-        { title: 'E-posta', text: 'hello@adventure-hub.com', channel: 'email' },
-        { title: 'Telefon', text: '+1 (555) 120-4400', channel: 'phone' },
-        { title: 'Ofis', text: '22 Summit Street, Zurich', channel: 'office' },
-        { title: 'Telegram', text: '@earn_walking', channel: 'telegram' },
+        { title: 'Ofis', text: 'ul. Marszałkowska 1, 00-624 Warszawa, Poland', channel: 'office' },
+        { title: 'Telegram', text: '@earn_walking_bot', channel: 'telegram' },
       ],
     },
     faq: {
       title: 'Sik Sorulan Sorular',
       description: 'En cok sorulan sorulara hizli yanitlar.',
       items: [
-        { q: 'Farkli aktiviteler icin rota planlayabilir miyim?', a: 'Evet. Platform yuruyus, bisiklet ve diger aktiviteler icin uyarlanabilir.' },
-        { q: 'Site birden fazla dili destekliyor mu?', a: 'Evet. Arayuze istediginiz diller icin bir dil secici eklendi.' },
-        { q: 'Icerigi daha sonra degistirebilir miyim?', a: 'Evet. Bu yapi son iceriginizle kolayca guncellenebilir.' },
+        { q: 'Nasil baslarim?', a: 'Telegram bot adresine girin ve adim adim yonlendirmeleri takip edin.' },
+        { q: 'Odeme nasil ve ne zaman yapiliyor?', a: 'Videoyu gonderdikten ve admin onayladiktan sonra odeme kartiniza yapilir. Her onayli video icin 10-15 dolar odenir.' },
+        { q: 'Bu proje nedir?', a: 'Biz, henuz tam kullanilabilir veya haritalanmamis bolgeler icin Waze benzeri bir uygulama gelistiren bir startup sirketiyiz.' },
       ],
     },
     blogs: {
@@ -325,6 +350,7 @@ const translations = {
       heroHeadline: 'Idz, cwicz, uchwyc, zarabiaj.',
       title: 'Znajdz i zaplanuj swoja kolejna przygode na swiezym powietrzu.',
       description: 'Podazaj trasami, uchwyc swoje przygody i zarabiaj na ich udostepnianiu!',
+      botCta: 'Otworz bota Telegram',
       primaryCta: 'Zacznij planowac',
       secondaryCta: 'Poznaj funkcje',
       features: [
@@ -340,24 +366,28 @@ const translations = {
         'Mapy offline.',
         'Historia aktywnosci.',
       ],
+      routeCards: [
+        { title: 'Zarabiaj za kazda godzine', text: 'Po sprawdzeniu i akceptacji filmow otrzymujesz zaplate za kazda nagrana godzine. Im wiecej dobrego materialu dodasz, tym wiecej zarobisz.' },
+        { title: 'Nagrywaj przypisana trase', text: 'Wybierz przypisana trase i nagrywaj cala droge w trakcie ruchu. Trzymaj sie wskazowek, aby tworzyc uzyteczny material.' },
+        { title: 'Badz aktywny i ruszaj sie', text: 'Zamien kazda trase w okazje do treningu i buduj bardziej aktywny styl zycia.' },
+        { title: 'Idz i zakoncz trase', text: 'Podazaj sugerowanymi sciezkami, pozostan aktywny i koncz kazda trase realnym ruchem.' },
+      ],
     },
     contact: {
       title: 'Kontakt',
       description: 'Skontaktuj sie z nami w sprawie wspolpracy, wsparcia lub pytan o produkt.',
       cards: [
-        { title: 'Email', text: 'hello@adventure-hub.com', channel: 'email' },
-        { title: 'Telefon', text: '+1 (555) 120-4400', channel: 'phone' },
-        { title: 'Biuro', text: '22 Summit Street, Zurich', channel: 'office' },
-        { title: 'Telegram', text: '@earn_walking', channel: 'telegram' },
+        { title: 'Biuro', text: 'ul. Marszałkowska 1, 00-624 Warszawa, Poland', channel: 'office' },
+        { title: 'Telegram', text: '@earn_walking_bot', channel: 'telegram' },
       ],
     },
     faq: {
       title: 'Najczestsze pytania',
       description: 'Szybkie odpowiedzi na najwazniejsze pytania.',
       items: [
-        { q: 'Czy moge planowac trasy dla roznych aktywnosci?', a: 'Tak. Platforma nadaje sie do wedrowek, jazdy na rowerze i nie tylko.' },
-        { q: 'Czy strona obsluguje wiele jezykow?', a: 'Tak. Interfejs ma teraz przelacznik jezykow.' },
-        { q: 'Czy moge pozniej zmienic tresc?', a: 'Tak. Struktura jest gotowa na Twoja finalna tresc.' },
+        { q: 'Jak zaczac?', a: 'Wejdz na adres bota Telegram i przejdz kroki krok po kroku.' },
+        { q: 'Jak i kiedy otrzymam platnosc?', a: 'Po wyslaniu filmu i zatwierdzeniu go przez admina, platnosc trafia na Twoja karte. Za kazdy zatwierdzony film placimy od 10 do 15 dolarow.' },
+        { q: 'Czym jest ten projekt?', a: 'Jestesmy startupem, ktory tworzy aplikacje podobna do Waze dla miejsc, ktore nadal nie sa dobrze uzywalne lub zmapowane.' },
       ],
     },
     blogs: {
@@ -385,6 +415,7 @@ const translations = {
       heroHeadline: 'Camina, entrena, captura, gana.',
       title: 'Encuentra y construye tu proxima aventura al aire libre.',
       description: 'Sigue rutas, captura tus aventuras y gana dinero por compartirlas.',
+      botCta: 'Abrir bot de Telegram',
       primaryCta: 'Empezar',
       secondaryCta: 'Ver funciones',
       features: [
@@ -400,24 +431,28 @@ const translations = {
         'Mapas offline.',
         'Seguimiento del progreso.',
       ],
+      routeCards: [
+        { title: 'Gana por cada hora', text: 'Despues de enviar tus videos y ser aprobados, recibes pago por cada hora grabada. Cuanto mas contenido aportes, mas ganas.' },
+        { title: 'Graba la ruta asignada', text: 'Elige la ruta asignada y captura tu recorrido de forma continua mientras avanzas. Sigue las pautas para crear contenido utilizable.' },
+        { title: 'Mantente activo, sigue moviendote', text: 'Convierte cada ruta en una oportunidad de fitness y construye un estilo de vida mas activo.' },
+        { title: 'Camina y completa la ruta', text: 'Sigue los caminos sugeridos, mantente activo y completa cada ruta con movimiento real.' },
+      ],
     },
     contact: {
       title: 'Contacto',
       description: 'Habla con nuestro equipo para alianzas, soporte o preguntas del producto.',
       cards: [
-        { title: 'Correo', text: 'hello@adventure-hub.com', channel: 'email' },
-        { title: 'Telefono', text: '+1 (555) 120-4400', channel: 'phone' },
-        { title: 'Oficina', text: '22 Summit Street, Zurich', channel: 'office' },
-        { title: 'Telegram', text: '@earn_walking', channel: 'telegram' },
+        { title: 'Oficina', text: 'ul. Marszałkowska 1, 00-624 Warszawa, Poland', channel: 'office' },
+        { title: 'Telegram', text: '@earn_walking_bot', channel: 'telegram' },
       ],
     },
     faq: {
       title: 'Preguntas frecuentes',
       description: 'Respuestas rapidas a las preguntas mas comunes.',
       items: [
-        { q: 'Puedo planificar rutas para distintas actividades?', a: 'Si. La plataforma puede adaptarse a senderismo, ciclismo y mas.' },
-        { q: 'El sitio soporta varios idiomas?', a: 'Si. La interfaz ahora incluye selector de idioma.' },
-        { q: 'Podre cambiar el contenido despues?', a: 'Si. La estructura esta lista para tu contenido final.' },
+        { q: 'Como empiezo?', a: 'Entra a la direccion del bot de Telegram y sigue los pasos uno por uno.' },
+        { q: 'Como y cuando recibo el pago?', a: 'Despues de enviar el video y de que el admin lo apruebe, el pago se envia a tu tarjeta. Cada video aprobado paga entre 10 y 15 dolares.' },
+        { q: 'Que es este proyecto?', a: 'Somos una startup que construye una aplicacion tipo Waze para zonas que todavia no son totalmente utilizables o no estan bien mapeadas.' },
       ],
     },
     blogs: {
@@ -445,6 +480,7 @@ const translations = {
       heroHeadline: 'Gulyay, treniruysya, snimay, zarabatyvay.',
       title: 'Najdite i soberite svoe sleduyushchee priklyuchenie na prirode.',
       description: 'Sleduyte po marshrutam, snimayte svoi priklyucheniya i poluchayte oplatu za to, chto delites imi.',
+      botCta: 'Otkryt Telegram-bota',
       primaryCta: 'Nachat planirovanie',
       secondaryCta: 'Posmotret vozmozhnosti',
       features: [
@@ -460,24 +496,28 @@ const translations = {
         'Oflayn-karty.',
         'Istoriya aktivnosti.',
       ],
+      routeCards: [
+        { title: 'Zarabotak za kazhdy chas', text: 'Posle proverki i odobreniya video vy poluchaete oplatu za kazhdy zapisannyy chas. Chem bolshe kachestvennogo kontenta, tem vyshe zarabotok.' },
+        { title: 'Snimayte naznachennyy marshrut', text: 'Vyberite naznachennyy marshrut i snimayte put nepreryvno vo vremya dvizheniya. Sledyte pravilam, chtoby poluchilsya poleznyy material.' },
+        { title: 'Budte aktivny, prodolzhayte dvigatsya', text: 'Prevrashchayte kazhdy marshrut v vozmozhnost dlya fitnesa i formiruyte bolee aktivnyy obraz zhizni.' },
+        { title: 'Idite i zavershayte marshrut', text: 'Sleduyte rekomendovannym putyam, ostavaytes v dvizhenii i zavershayte kazhdy marshrut realnoy hodboy.' },
+      ],
     },
     contact: {
       title: 'Kontakty',
       description: 'Svazhites s nashey komandoy po voprosam partnerstva, podderzhki ili produkta.',
       cards: [
-        { title: 'Email', text: 'hello@adventure-hub.com', channel: 'email' },
-        { title: 'Telefon', text: '+1 (555) 120-4400', channel: 'phone' },
-        { title: 'Ofis', text: '22 Summit Street, Zurich', channel: 'office' },
-        { title: 'Telegram', text: '@earn_walking', channel: 'telegram' },
+        { title: 'Ofis', text: 'ul. Marszałkowska 1, 00-624 Warszawa, Poland', channel: 'office' },
+        { title: 'Telegram', text: '@earn_walking_bot', channel: 'telegram' },
       ],
     },
     faq: {
       title: 'Chasto zadavaemye voprosy',
       description: 'Bystrye otvety na samye populyarnye voprosy.',
       items: [
-        { q: 'Mogu li ya planirovat marshruty dlya raznyh aktivnostey?', a: 'Da. Platforma podhodit dlya pohodov, velopoezdok i drugih formatov.' },
-        { q: 'Podderzhivaet li sayt neskolko yazykov?', a: 'Da. Interfeys teper soderzhit pereklyuchatel yazykov.' },
-        { q: 'Mozhno li izmenit kontent pozhe?', a: 'Da. Struktura gotova dlya zameny na finalnyy kontent.' },
+        { q: 'Kak nachat?', a: 'Pereydite po adresu Telegram-bota i proydite shag za shagom vse etapy.' },
+        { q: 'Kak i kogda ya poluchu oplatu?', a: 'Posle otpravki video i ego odobreniya adminom oplata postupaet na kartu. Za kazhdoe odobrennoe video vyplachivaetsya ot 10 do 15 dollarov.' },
+        { q: 'Chto eto za proekt?', a: 'My startup, kotoryy sozdaet prilozhenie po tipu Waze dlya mest, kotorye poka nedostatochno pokryty ili trudno ispolzovat.' },
       ],
     },
     blogs: {
@@ -505,6 +545,7 @@ const translations = {
       heroHeadline: 'Lauf, trainier, halt fescht, verdien.',
       title: 'Finde dis nechschte Outdoor-Abentuur.',
       description: 'Folg Routen, halt dini Abentuur fescht und verdien Geld, wenn du sie teilsch!',
+      botCta: 'Telegram-Bot offne',
       primaryCta: 'Jetzt plane',
       secondaryCta: 'Funktionen aluege',
       features: [
@@ -520,24 +561,28 @@ const translations = {
         'Offline-Charte.',
         'Aktivitatsverlauf.',
       ],
+      routeCards: [
+        { title: 'Verdien pro Stund', text: 'Wen dini Videos pruift und freigeh sind, bechunsch fur jedi ufgnommni Stund Geld. Je meh du bisch drbi, desto meh verdienisch.' },
+        { title: 'Nimm d zuegwiseni Route uf', text: 'Wahl d zuegwiseni Route und nimm dini Bewegig durgehend uf. Mit de Richtlinie machsch bruuchbare Inhalt.' },
+        { title: 'Blib aktiv, bliib in Bewegig', text: 'Mach us jeder Route e Fitness-Chance und bau dir en aktiveri Alltag uuf.' },
+        { title: 'Lauf und schliess d Route ab', text: 'Folg de vorgeschlagene Wäg, bliib aktiv und schliess jedi Route mit echter Bewegig ab.' },
+      ],
     },
     contact: {
       title: 'Kontakt',
       description: 'Meld di bi eus fur Partnerschafte, Support oder Produktfrage.',
       cards: [
-        { title: 'E-Mail', text: 'hello@adventure-hub.com', channel: 'email' },
-        { title: 'Telefon', text: '+1 (555) 120-4400', channel: 'phone' },
-        { title: 'Buro', text: '22 Summit Street, Zurich', channel: 'office' },
-        { title: 'Telegram', text: '@earn_walking', channel: 'telegram' },
+        { title: 'Buro', text: 'ul. Marszałkowska 1, 00-624 Warszawa, Poland', channel: 'office' },
+        { title: 'Telegram', text: '@earn_walking_bot', channel: 'telegram' },
       ],
     },
     faq: {
       title: 'Hufig gstellti Frage',
       description: 'Schnelli Antworte uf die wichtigschte Frage.',
       items: [
-        { q: 'Cha ich Route fur verschiedeni Aktivitaten plane?', a: 'Ja. D Plattform passt fur Wandere, Velofahre und meh.' },
-        { q: 'Git s mehri Sprache?', a: 'Ja. D Oberflachi het jetzt en Sprachwahler.' },
-        { q: 'Cha mer de Inhalt spater ändere?', a: 'Ja. D Struktur isch ready fur din finale Inhalt.' },
+        { q: 'Wie fang ich aa?', a: 'Gang uf d Telegram-Bot-Adresse und folg de Schritt nacheinander.' },
+        { q: 'Wie und wenn bechum ich mini Zahlig?', a: 'Nach em Sende vom Video und dr Freigab dur de Admin chunt d Zahlig uf dini Charte. Pro freigegebnem Video git s 10 bis 15 Dollar.' },
+        { q: 'Was isch das fur es Projekt?', a: 'Mir sind es Startup und boued e App ahnlich wie Waze fur Ort, wo no nid guet nutzbar oder kartiert sind.' },
       ],
     },
     blogs: {
@@ -569,6 +614,63 @@ function NavLink({ href, children, isActive }) {
   );
 }
 
+function LanguageSelect({ label, value, onChange, className = '' }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const containerRef = useRef(null);
+  const selectedLanguage = supportedLanguages.find((item) => item.code === value) || supportedLanguages[0];
+
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (containerRef.current && !containerRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    window.addEventListener('mousedown', handleOutsideClick);
+    return () => {
+      window.removeEventListener('mousedown', handleOutsideClick);
+    };
+  }, []);
+
+  return (
+    <div className={`language-select ${className}`} ref={containerRef}>
+      <span>{label}</span>
+      <button
+        type="button"
+        className="language-trigger"
+        onClick={() => setIsOpen((prev) => !prev)}
+        aria-haspopup="listbox"
+        aria-expanded={isOpen}
+      >
+        <span className="language-option-content">
+          <ReactCountryFlag countryCode={selectedLanguage.countryCode} svg />
+          <span>{selectedLanguage.label}</span>
+        </span>
+      </button>
+      {isOpen ? (
+        <div className="language-menu" role="listbox">
+          {supportedLanguages.map((item) => (
+            <button
+              key={item.code}
+              type="button"
+              className={`language-option${item.code === value ? ' active' : ''}`}
+              onClick={() => {
+                onChange(item.code);
+                setIsOpen(false);
+              }}
+            >
+              <span className="language-option-content">
+                <ReactCountryFlag countryCode={item.countryCode} svg />
+                <span>{item.label}</span>
+              </span>
+            </button>
+          ))}
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
 function RouteContent({ pathname, copy }) {
   if (pathname === '/') {
     return <HomePage copy={copy.home} />;
@@ -580,10 +682,6 @@ function RouteContent({ pathname, copy }) {
 
   if (pathname === '/faq') {
     return <FaqPage copy={copy.faq} tag={copy.routerReady} />;
-  }
-
-  if (pathname === '/blogs') {
-    return <BlogsPage copy={copy.blogs} tag={copy.routerReady} />;
   }
 
   return (
@@ -615,7 +713,6 @@ function App() {
       { label: copy.nav.home, href: '/' },
       { label: copy.nav.contact, href: '/contact-us' },
       { label: copy.nav.faq, href: '/faq' },
-      { label: copy.nav.blogs, href: '/blogs' },
     ],
     [copy]
   );
@@ -629,7 +726,9 @@ function App() {
       <div className="app-shell">
         <div className="topbar">
           <div className="topbar-left">
-            <div className="brand">LOGO</div>
+            <div className="brand">
+              <img src="/images/logo.png" alt="Logo" className="brand-logo" />
+            </div>
             <button
               type="button"
               className={`hamburger${isMenuOpen ? ' is-open' : ''}`}
@@ -650,16 +749,12 @@ function App() {
                 </NavLink>
               ))}
             </nav>
-            <label className="language-select desktop-language">
-              <span>{copy.selectorLabel}</span>
-              <select value={language} onChange={(event) => setLanguage(event.target.value)}>
-                {supportedLanguages.map((item) => (
-                  <option key={item.code} value={item.code}>
-                    {item.label}
-                  </option>
-                ))}
-              </select>
-            </label>
+            <LanguageSelect
+              label={copy.selectorLabel}
+              value={language}
+              onChange={setLanguage}
+              className="desktop-language"
+            />
           </div>
         </div>
 
@@ -672,16 +767,12 @@ function App() {
                 </NavLink>
               ))}
             </nav>
-            <label className="language-select mobile-language">
-              <span>{copy.selectorLabel}</span>
-              <select value={language} onChange={(event) => setLanguage(event.target.value)}>
-                {supportedLanguages.map((item) => (
-                  <option key={item.code} value={item.code}>
-                    {item.label}
-                  </option>
-                ))}
-              </select>
-            </label>
+            <LanguageSelect
+              label={copy.selectorLabel}
+              value={language}
+              onChange={setLanguage}
+              className="mobile-language"
+            />
           </div>
         </div>
 
