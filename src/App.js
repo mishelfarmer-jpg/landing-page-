@@ -10,7 +10,7 @@ import useI18n from './i18n/useI18n';
 const translations = {
   en: {
     languageName: 'English',
-    brand: 'Landing Page',
+    brand: 'Earn Walking',
     nav: { home: 'Home', contact: 'Contact Us', faq: 'FAQ', blogs: 'Blogs' },
     selectorLabel: 'Language',
     routerReady: 'Router Ready',
@@ -19,14 +19,14 @@ const translations = {
       description: 'This route does not exist yet. Use the menu to return to one of the configured pages.',
     },
     home: {
-      kicker: 'Plan, Navigate, Share',
-      heroHeadline: 'Earn, Walk, Exercise, Capture.',
-      title: 'Find and build your next outdoor adventure.',
+      kicker: 'Map data · Active income · Real routes',
+      heroHeadline: 'Walk real routes. Record clear video. Get paid.',
+      title: 'Turn everyday walks into paid map content.',
       description:
-        'Follow routes, capture your adventures, and get paid for sharing them!',
-      botCta: 'Open Telegram',
-      primaryCta: 'Start Planning',
-      secondaryCta: 'Explore Features',
+        'We connect walkers with mapping tasks: follow an assigned route, record your journey, and earn when your footage is approved.',
+      botCta: 'Start in Telegram',
+      primaryCta: 'Start in Telegram',
+      secondaryCta: 'How it works',
       features: [
         { title: 'Smart Route Planning', text: 'Build routes with elevation, surface type, and distance details before you move.' },
         { title: 'Confident Navigation', text: 'Follow turn-by-turn guidance for hiking, cycling, and mixed adventures on any device.' },
@@ -77,7 +77,7 @@ const translations = {
   },
   de: {
     languageName: 'Deutsch',
-    brand: 'Landingpage',
+    brand: 'Earn Walking',
     nav: { home: 'Startseite', contact: 'Kontakt', faq: 'FAQ', blogs: 'Blog' },
     selectorLabel: 'Sprache',
     routerReady: 'Router bereit',
@@ -142,7 +142,7 @@ const translations = {
   },
   fr: {
     languageName: 'Francais',
-    brand: 'Page de destination',
+    brand: 'Earn Walking',
     nav: { home: 'Accueil', contact: 'Contact', faq: 'FAQ', blogs: 'Blogs' },
     selectorLabel: 'Langue',
     routerReady: 'Route prete',
@@ -207,7 +207,7 @@ const translations = {
   },
   he: {
     languageName: 'עברית',
-    brand: 'דף נחיתה',
+    brand: 'Earn Walking',
     nav: { home: 'דף הבית', contact: 'צור קשר', faq: 'שאלות נפוצות', blogs: 'בלוגים' },
     selectorLabel: 'שפה',
     routerReady: 'הנתיב מוכן',
@@ -272,7 +272,7 @@ const translations = {
   },
   tr: {
     languageName: 'Turkce',
-    brand: 'Acilis Sayfasi',
+    brand: 'Earn Walking',
     nav: { home: 'Ana Sayfa', contact: 'Iletisim', faq: 'SSS', blogs: 'Bloglar' },
     selectorLabel: 'Dil',
     routerReady: 'Rota hazir',
@@ -337,7 +337,7 @@ const translations = {
   },
   pl: {
     languageName: 'Polski',
-    brand: 'Landing Page',
+    brand: 'Earn Walking',
     nav: { home: 'Start', contact: 'Kontakt', faq: 'FAQ', blogs: 'Blog' },
     selectorLabel: 'Jezyk',
     routerReady: 'Trasa gotowa',
@@ -402,7 +402,7 @@ const translations = {
   },
   es: {
     languageName: 'Espanol',
-    brand: 'Landing Page',
+    brand: 'Earn Walking',
     nav: { home: 'Inicio', contact: 'Contacto', faq: 'FAQ', blogs: 'Blogs' },
     selectorLabel: 'Idioma',
     routerReady: 'Ruta lista',
@@ -467,7 +467,7 @@ const translations = {
   },
   ru: {
     languageName: 'Russkiy',
-    brand: 'Landing Page',
+    brand: 'Earn Walking',
     nav: { home: 'Glavnaya', contact: 'Kontakty', faq: 'FAQ', blogs: 'Blogi' },
     selectorLabel: 'Yazyk',
     routerReady: 'Marshrut gotov',
@@ -532,7 +532,7 @@ const translations = {
   },
   deCH: {
     languageName: 'Swiss German',
-    brand: 'Landing Page',
+    brand: 'Earn Walking',
     nav: { home: 'Start', contact: 'Kontakt', faq: 'FAQ', blogs: 'Blogs' },
     selectorLabel: 'Sproch',
     routerReady: 'Route bereit',
@@ -677,11 +677,11 @@ function RouteContent({ pathname, copy }) {
   }
 
   if (pathname === '/contact-us') {
-    return <ContactPage copy={copy.contact} tag={copy.routerReady} />;
+    return <ContactPage copy={copy.contact} />;
   }
 
   if (pathname === '/faq') {
-    return <FaqPage copy={copy.faq} tag={copy.routerReady} />;
+    return <FaqPage copy={copy.faq} />;
   }
 
   return (
@@ -726,9 +726,10 @@ function App() {
       <div className="app-shell">
         <div className="topbar">
           <div className="topbar-left">
-            <div className="brand">
-              <img src="/images/logo.png" alt="Logo" className="brand-logo" />
-            </div>
+            <button type="button" className="brand" onClick={() => navigateTo('/')} aria-label={copy.brand}>
+              <img src="/images/logo.png" alt="" className="brand-logo" />
+              <span className="brand-name">{copy.brand}</span>
+            </button>
             <button
               type="button"
               className={`hamburger${isMenuOpen ? ' is-open' : ''}`}

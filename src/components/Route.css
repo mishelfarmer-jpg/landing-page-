@@ -27,6 +27,10 @@
 
 .route-planning-card {
   border-radius: 28px;
+  padding: clamp(1rem, 3vw, 1.5rem);
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  box-shadow: 0 20px 48px rgba(15, 23, 42, 0.06);
 }
 
 .route-planning-copy,
@@ -44,17 +48,18 @@
 
 .css-hsm268 {
   margin: 0 0 1rem;
-  color: #3b235a;
-  font-size: clamp(2rem, 3vw, 3.25rem);
-  font-weight: 700;
-  line-height: 1.1;
+  color: #0f172a;
+  font-size: clamp(1.75rem, 3vw, 2.85rem);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
 }
 
 .css-12q5edf {
   margin: 0;
-  color: #5d4a72;
+  color: #475569;
   font-size: clamp(1rem, 1.5vw, 1.125rem);
-  line-height: 1.8;
+  line-height: 1.75;
 }
 
 .css-12gy35o {

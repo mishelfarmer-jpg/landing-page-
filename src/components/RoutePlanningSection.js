@@ -40,10 +40,10 @@ function RoutePlanningSection({ items = [] }) {
   }));
 
   return (
-    <section className="css-1wv6em4 route-planning-section">
+    <section id="how-it-works" className="css-1wv6em4 route-planning-section" aria-label="How it works">
       {mergedItems.map((item, index) => (
         <div
-          key={item.title}
+          key={`${item.imageSrc}-${index}`}
           className={`css-1cnorxb route-planning-card ${
             index % 2 === 1 ? 'route-planning-card--reversed' : ''
           }`}

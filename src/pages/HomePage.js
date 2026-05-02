@@ -91,6 +91,19 @@ function HomePage({ copy }) {
     }, 260);
   };
 
+  const jumpToVideo = (index) => {
+    if (isClosing || index === videoIndex) {
+      return;
+    }
+    if (autoAdvanceTimeoutRef.current) {
+      window.clearTimeout(autoAdvanceTimeoutRef.current);
+    }
+    setIsClosing(true);
+    transitionTimeoutRef.current = window.setTimeout(() => {
+      setVideoIndex(index);
+    }, 260);
+  };
+
   return (
     <main className="home-page">
       <section className="video-hero">
@@ -127,44 +140,54 @@ function HomePage({ copy }) {
         </div>
 
         <div className="hero-video-copy">
+          <p className="hero-kicker">{copy.kicker}</p>
           <h1>{copy.heroHeadline}</h1>
-          <p>{copy.description}</p>
-          <a
-            className="hero-bot-cta"
-            href="https://t.me/earn_walking_bot"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <span className="hero-bot-cta-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M21.8 3.2 2.9 10.4c-1 .4-1 1 0 1.3l4.7 1.5 1.7 5.3c.2.8.7 1 1.2.4l2.7-3 4.9 3.6c.8.6 1.4.3 1.6-.8l3.2-14c.3-1.2-.4-1.8-1.4-1.5Z"
-                  stroke="currentColor"
-                  strokeWidth="1.6"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="m7.9 13.2 11.3-7.6M9.3 18.7l1.2-4.2"
-                  stroke="currentColor"
-                  strokeWidth="1.6"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </span>
-            <span>{copy.botCta}</span>
-          </a>
+          {copy.title ? <p className="hero-subtitle">{copy.title}</p> : null}
+          <p className="hero-description">{copy.description}</p>
+          <div className="hero-actions">
+            <a
+              className="hero-bot-cta"
+              href="https://t.me/earn_walking_bot"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span className="hero-bot-cta-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M21.8 3.2 2.9 10.4c-1 .4-1 1 0 1.3l4.7 1.5 1.7 5.3c.2.8.7 1 1.2.4l2.7-3 4.9 3.6c.8.6 1.4.3 1.6-.8l3.2-14c.3-1.2-.4-1.8-1.4-1.5Z"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="m7.9 13.2 11.3-7.6M9.3 18.7l1.2-4.2"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </span>
+              <span>{copy.botCta}</span>
+            </a>
+            <a className="hero-secondary-cta" href="#how-it-works">
+              {copy.secondaryCta}
+            </a>
+          </div>
         </div>
 
-        <svg className="hero-shape shape-one" viewBox="0 0 200 200" aria-hidden="true">
-          <circle cx="100" cy="100" r="72" />
-        </svg>
-        <svg className="hero-shape shape-two" viewBox="0 0 240 120" aria-hidden="true">
-          <path d="M8 70 C55 8 190 8 232 70" />
-        </svg>
-        <svg className="hero-shape shape-three" viewBox="0 0 120 120" aria-hidden="true">
-          <rect x="14" y="14" width="92" height="92" rx="20" />
-        </svg>
+        <div className="hero-video-dots" role="group" aria-label="Video clips">
+          {playlist.map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              className={`hero-video-dot${i === videoIndex ? ' is-active' : ''}`}
+              aria-label={`Clip ${i + 1}${i === videoIndex ? ', current' : ''}`}
+              aria-current={i === videoIndex ? 'true' : undefined}
+              onClick={() => jumpToVideo(i)}
+            />
+          ))}
+        </div>
       </section>
 
       <RoutePlanningSection items={copy.routeCards} />

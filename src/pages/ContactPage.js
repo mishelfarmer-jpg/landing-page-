@@ -75,7 +75,7 @@ function ContactPage({ copy, tag }) {
   return (
     <main className="page-content page-grid contact-page">
       <div className="page-intro">
-        <span className="page-tag">{tag}</span>
+        {tag ? <span className="page-tag">{tag}</span> : null}
         <h1>{copy.title}</h1>
         <p>{copy.description}</p>
       </div>
